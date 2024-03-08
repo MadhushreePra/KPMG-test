@@ -1,0 +1,9 @@
+provider "http" {}
+
+data "http" "aws_instance_metadata" {
+  url = "http://169.254.169.254/latest/dynamic/instance-identity/document"
+}
+
+output "aws_instance_metadata_json" {
+  value = jsondecode(data.http.aws_instance_metadata.body)
+}
